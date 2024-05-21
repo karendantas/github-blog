@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
 export const ProfileContainer = styled.div`
-    max-width: 54rem;
+
     width: 100%;
     padding: 2rem  2.5rem;
     background-color: ${props => props.theme["base-profile"]};
     border-radius: 10px;
     transform: translateY(-30%);
-    margin: 0 auto;
 
     img{
         height: 9.25rem;
@@ -22,6 +21,7 @@ export const ProfileContent = styled.div `
 
     display: flex;
     align-items: flex-start;
+    justify-content: space-between;
     gap: 2rem;
 
     h2{
