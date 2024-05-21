@@ -1,6 +1,7 @@
+import { Post } from "../../components/post";
 import { Profile } from "./components/profile";
 import { SearchForm } from "./components/searchForm";
-import { HomeContainer, IssuesInfo } from "./styles";
+import { HomeContainer, IssuesInfo, IssuesContainer } from "./styles";
 
 
 export function Home (){
@@ -15,6 +16,13 @@ export function Home (){
             </IssuesInfo>
 
             <SearchForm />
+
+            <IssuesContainer>
+                <Post />
+                <Post />
+                <Post />
+                <Post />
+            </IssuesContainer>
             
         </HomeContainer>
     )
