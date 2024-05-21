@@ -1,8 +1,11 @@
+import { Profile } from "./components/profile";
+
 
 export function Home (){
+   
     return (
         <>
-        <h1>home</h1>
+            <Profile />
         </>
     )
 }
