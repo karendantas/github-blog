@@ -26,9 +26,8 @@ export const IssuesInfo = styled.div`
 export const IssuesContainer = styled.div `
     width: 100%;
     margin-top: 3rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
 
 `

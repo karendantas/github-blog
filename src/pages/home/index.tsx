@@ -22,6 +22,7 @@ export function Home (){
             <SearchForm />
 
             <IssuesContainer>
+                
                 {userPosts.map((post) => {
                     return (
                         <Link 

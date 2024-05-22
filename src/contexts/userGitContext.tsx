@@ -1,6 +1,7 @@
 
 import { createContext, ReactNode, useEffect, useState } from "react"
 import { apiPosts, apiUser } from "../lib/axios";
+import axios from "axios";
 
 
 interface userGitType {
@@ -24,6 +25,8 @@ export interface userPostsType {
 interface userGitContextProps {
     userGit: userGitType;
     userPosts: userPostsType[];
+    fetchGitHubSearchUserPost(query?: string): Promise<void>;
+
 }
 export const userGitContext = createContext({} as userGitContextProps);
 
@@ -49,10 +52,29 @@ export function UserGitContextProvider( {children} : UserGitContextProviderProps
         
     }
 
+    async function fetchGitHubSearchUserPost(query?: string ){   
+     
+        try {
+            let url = 'https://api.github.com/search/issues';
+            if (query) {
+                url += `?q=repo:karendantas/github-blog is:issue${query}`;
+            } else {
+                url += `?q=repo:karendantas/github-blog is:issue`;
+            }
+    
+            const response = await axios.get(url);
+            setUserPosts(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
     async function fetchGitHubUserPost(){   
         try{
 
             const response = await apiPosts.get('/karendantas/github-blog/issues')
+
             setUserPosts(response.data);
 
         }catch(error){
@@ -60,13 +82,14 @@ export function UserGitContextProvider( {children} : UserGitContextProviderProps
         }
     }
 
+
     useEffect( () => {
         fetchGitHubUser();
         fetchGitHubUserPost();
     }, []);
 
     return (
-        <userGitContext.Provider value = {{userGit, userPosts}}>
+        <userGitContext.Provider value = {{userGit, userPosts, fetchGitHubSearchUserPost}}>
             {children}
         </userGitContext.Provider>
     )

@@ -39,7 +39,8 @@ export const PostContent = styled.div`
         }
         span {
             font-size: 0.875rem;
-            color: ${props => props.theme['base-span']}
+            color: ${props => props.theme['base-span']};
+            width: 50%;
         }
     }
 
