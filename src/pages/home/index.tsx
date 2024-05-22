@@ -1,3 +1,4 @@
+
 import { Post } from "../../components/post";
 import { Profile } from "./components/profile";
 import { SearchForm } from "./components/searchForm";

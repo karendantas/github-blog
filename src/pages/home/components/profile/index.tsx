@@ -6,34 +6,39 @@ import { faArrowUpRightFromSquare, faBuilding, faUserGroup } from "@fortawesome/
 import {GitLink, ProfileContainer, 
         ProfileContent, 
         ProfileInfos } from "./styles";
+import { useContext } from "react";
+import { userGitContext } from "../../../../contexts/userGitContext";
 
 
 export function Profile (){
+
+    const { userGit } = useContext(userGitContext);
+
     return (
         <ProfileContainer>
             <ProfileContent>
-                <img src="https://github.com/karendantas.png" alt=""/>
+                <img src={userGit.data.avatar_url} alt=""/>
                 <div>
-                    <h2>Cameroan</h2>
-                    <p>Tristique volutpat pulvinar vel massa, pellentesque egestas. dfsxdmeurbumbandoaod ajksf aossdf, ajskdfjsf.</p>
+                    <h2>{userGit.data.name}</h2>
+                    <p>{userGit.data.bio}.</p>
                     <ProfileInfos>
                         <div>
                             <FontAwesomeIcon icon={faGithub} />
-                            <span>camerowçç</span>
+                            <span>{userGit.data.login}</span>
                         </div>
                         <div>
                             <FontAwesomeIcon icon={faBuilding} />
-                            <span>camerowçç</span>
+                            <span>{userGit.data.company}</span>
                         </div>
                         <div>
                             <FontAwesomeIcon icon={faUserGroup} />
-                            <span>camerowçç</span>
+                            <span>{userGit.data.followers}</span>
                         </div>
                       
                     </ProfileInfos>
                 </div>
                 
-                    <GitLink> 
+                    <GitLink href={`https://github.com/${userGit.data.login}`} target="_blank"> 
                         GITHUB <FontAwesomeIcon icon = {faArrowUpRightFromSquare} />    
                     </GitLink>
                    
