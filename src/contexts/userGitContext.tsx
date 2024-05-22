@@ -12,21 +12,17 @@ interface userGitType {
     avatar_url: string,
 }
 
-interface userPosts {
+export interface userPostsType {
+    id: number;
     title: string,
     body: string,
     comments: number,
     created_at: string
 }
 
-interface datapost {
-    data: userPosts
-}
-interface data {
-    data: userGitType
-}
 interface userGitContextProps {
     userGit: userGitType;
+    userPosts: userPostsType[];
 }
 export const userGitContext = createContext({} as userGitContextProps);
 
@@ -37,36 +33,39 @@ interface UserGitContextProviderProps {
 
 export function UserGitContextProvider( {children} : UserGitContextProviderProps){
     const [userGit, setUserGit] = useState({} as userGitType);
+    const [userPosts, setUserPosts] =  useState<userPostsType[]>([]);
 
 
     async function fetchGitHubUser(){
         try{
 
             const response = await apiUser.get('/karendantas');
-            
-            console.log(response)
-           
-            
             setUserGit(response.data);
+
         }catch(error){
             console.log(error)
         }
         
     }
 
-    // async function fetchGitHubUserPost(){   
-    //     const response = await apiPosts.get('/karendantas/github-blog/issues/1')
-    //     if (response){
-    //         setUserPosts(response);
-    //     }
-    // }
+    async function fetchGitHubUserPost(){   
+        try{
+
+            const response = await apiPosts.get('/karendantas/github-blog/issues')
+            setUserPosts(response.data);
+
+        }catch(error){
+            console.log(error)
+        }
+    }
 
     useEffect( () => {
         fetchGitHubUser();
+        fetchGitHubUserPost();
     }, []);
 
     return (
-        <userGitContext.Provider value = {{userGit}}>
+        <userGitContext.Provider value = {{userGit, userPosts}}>
             {children}
         </userGitContext.Provider>
     )

@@ -1,20 +1,25 @@
-// import { useContext } from "react";
+
+import { userPostsType } from "../../contexts/userGitContext";
 import {PostContainer,
         PostContent } from "./styles";
-// import { userGitContext } from "../../contexts/userGitContext";
 
-export function Post (){
-    // const {userPosts} = useContext(userGitContext);
+interface PostProps {
+    data: userPostsType;
+}
+export function Post ({data}: PostProps){
+
     return (
         <PostContainer>
-              <PostContent>
-                    <header>
-                        <h2>ahjg</h2>
-                        <span>Há 1 dia</span>
-                    </header>
-                    <p>Programming languages all have built-in data structures, but these often differ from one language to another. This article attempts to list the built-in data structures available in JavaScript and what properties they have. These can be used to build other data structures. Wherever possible, comparisons with other languages are drawn.
-                    </p>
-                </PostContent>
+
+                    <PostContent >
+                            <header>
+                                <h2> {data.title}</h2>
+                                <span>{data.created_at}</span>
+                            </header>
+                            <p>{data.body}</p>
+                    </PostContent>
+                    
+           
         </PostContainer>
     )
 }
