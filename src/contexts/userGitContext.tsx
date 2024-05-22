@@ -1,5 +1,6 @@
-import axios from "axios";
+
 import { createContext, ReactNode, useEffect, useState } from "react"
+import { apiPosts, apiUser } from "../lib/axios";
 
 
 interface userGitType {
@@ -10,33 +11,59 @@ interface userGitType {
     company: string,
     avatar_url: string,
 }
+
+interface userPosts {
+    title: string,
+    body: string,
+    comments: number,
+    created_at: string
+}
+
+interface datapost {
+    data: userPosts
+}
 interface data {
     data: userGitType
 }
 interface userGitContextProps {
-    userGit: data;
+    userGit: userGitType;
 }
 export const userGitContext = createContext({} as userGitContextProps);
 
 
 interface UserGitContextProviderProps {
-    children: ReactNode
+    children: ReactNode;
 }
-export function UserGitContextProvider( {children} : UserGitContextProviderProps){
-    const [userGit, setUserGit] = useState({} as data);
 
-    async function fetchGitHubApi(){
-        const api = axios.create({
-            baseURL: 'https://api.github.com/users'
-        })
+export function UserGitContextProvider( {children} : UserGitContextProviderProps){
+    const [userGit, setUserGit] = useState({} as userGitType);
+
+
+    async function fetchGitHubUser(){
+        try{
+
+            const response = await apiUser.get('/karendantas');
+            
+            console.log(response)
+           
+            
+            setUserGit(response.data);
+        }catch(error){
+            console.log(error)
+        }
         
-        const response = await api.get('/karendantas');
-        setUserGit(response);
     }
 
+    // async function fetchGitHubUserPost(){   
+    //     const response = await apiPosts.get('/karendantas/github-blog/issues/1')
+    //     if (response){
+    //         setUserPosts(response);
+    //     }
+    // }
+
     useEffect( () => {
-        fetchGitHubApi()
-    }, [])
+        fetchGitHubUser();
+    }, []);
 
     return (
         <userGitContext.Provider value = {{userGit}}>

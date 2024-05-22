@@ -8,20 +8,21 @@ export const ProfileContainer = styled.div`
     border-radius: 10px;
     transform: translateY(-30%);
 
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
     img{
         height: 9.25rem;
         width:9.25rem ;
         border-radius: 8px;
     }
-
-
 `;
 
 export const ProfileContent = styled.div `
 
     display: flex;
     align-items: flex-start;
-    justify-content: space-between;
     gap: 2rem;
 
     h2{

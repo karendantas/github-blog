@@ -17,32 +17,34 @@ export function Profile (){
     return (
         <ProfileContainer>
             <ProfileContent>
-                <img src={userGit.data.avatar_url} alt=""/>
+                <img src={userGit.avatar_url} alt=""/>
                 <div>
-                    <h2>{userGit.data.name}</h2>
-                    <p>{userGit.data.bio}.</p>
+                    <h2>{userGit.name }</h2>
+                    <p>{userGit.bio}.</p>
                     <ProfileInfos>
                         <div>
                             <FontAwesomeIcon icon={faGithub} />
-                            <span>{userGit.data.login}</span>
+                            <span>{userGit.login}</span>
                         </div>
                         <div>
                             <FontAwesomeIcon icon={faBuilding} />
-                            <span>{userGit.data.company}</span>
+                            <span>{userGit.company}</span>
                         </div>
                         <div>
                             <FontAwesomeIcon icon={faUserGroup} />
-                            <span>{userGit.data.followers}</span>
+                            <span>{userGit.followers}</span>
                         </div>
                       
                     </ProfileInfos>
                 </div>
                 
-                    <GitLink href={`https://github.com/${userGit.data.login}`} target="_blank"> 
-                        GITHUB <FontAwesomeIcon icon = {faArrowUpRightFromSquare} />    
-                    </GitLink>
                    
             </ProfileContent>
+
+                    <GitLink href={`https://github.com/${userGit.login}`} target="_blank"> 
+                        GITHUB <FontAwesomeIcon icon = {faArrowUpRightFromSquare} />    
+                    </GitLink>
+                    
         </ProfileContainer>
     )
 }
