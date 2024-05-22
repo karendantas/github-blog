@@ -5,6 +5,7 @@ import { userGitContext } from "../../contexts/userGitContext";
 import { Profile } from "./components/profile";
 import { SearchForm } from "./components/searchForm";
 import { HomeContainer, IssuesInfo, IssuesContainer } from "./styles";
+import { Link } from "react-router-dom";
 
 
 export function Home (){
@@ -23,9 +24,15 @@ export function Home (){
             <IssuesContainer>
                 {userPosts.map((post) => {
                     return (
+                        <Link 
+                            to={`/post/${post.number}`} 
+                            key={post.id}
+                            >
                         <Post 
                             key = {post.id} 
-                            data = {post}/>
+                            data = {post}
+                        />
+                        </Link>
                     )
                 })}
             </IssuesContainer>

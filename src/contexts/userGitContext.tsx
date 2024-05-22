@@ -13,7 +13,8 @@ interface userGitType {
 }
 
 export interface userPostsType {
-    id: number;
+    id: string,
+    number: number,
     title: string,
     body: string,
     comments: number,
